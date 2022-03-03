@@ -1,3 +1,4 @@
 ipdb==0.13.9
 pytest==7.0.1
 requests==2.27.1
+ckanapi==4.0.0

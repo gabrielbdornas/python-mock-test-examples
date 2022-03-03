@@ -1,5 +1,4 @@
 from unittest import mock
-import pytest
 from get_ip import get_ip
 
 @mock.patch("get_ip.requests.get")
