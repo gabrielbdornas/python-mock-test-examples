@@ -1,10 +1,14 @@
-from ckanapi import RemoteCKAN
+import requests
 
-def ckan_show(ckan_host, dataset_id):
-  # import ipdb; ipdb.set_trace(context=10)
-  # ckan_instance = RemoteCKAN('https://homologa.cge.mg.gov.br/') #, apikey = ckan_key)
-  # result = ckan_instance.action.package_show(id = 'letters-vowel')
-  return RemoteCKAN(ckan_host).action.package_show(id = dataset_id)['state']
-  # return RemoteCKAN(ckan_host).action.package_show(id = dataset_id)
+def get_ckan_dataset_id(ckan_host, dataset_name):
+  url = f"{ckan_host}/api/3/action/package_show?id={dataset_name}"
+  # make the request and return the json
+  response = requests.get(url)
+  if response.status_code == 200:
+    dataset = response.json()
+    return dataset['result']['id']
+  else:
+    return None
 
-# print(ckan_show('https://homologa.cge.mg.gov.br/', 'letters-vowel'))
+
+# print(get_ckan_dataset_id('https://homologa.cge.mg.gov.br', 'letters-vowel'))
